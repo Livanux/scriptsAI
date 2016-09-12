@@ -1,0 +1,14 @@
+########################################
+#   INSTITUTO TECNOLOGICO DE ENSENADA  #
+#   Ing. Sistemas Computacionales      #
+#       Inteligencia Artificial        #
+#  Chávez Sánchez Guillermo Alejandro  #
+########################################
+
+Team Members:
+  - Espinoza Larios Luis Edmundo    |  12760324 
+  - Gastelum Romero Jesús Iván      |  12760326
+
+Emails:
+  - al12760324@ite.edu.mx
+  - al12760326@ite.edu.mx
