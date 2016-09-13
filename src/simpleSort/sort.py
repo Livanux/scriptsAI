@@ -14,9 +14,6 @@ from time import time
 SIZE = 4
 ARRAY_SIZE = SIZE * SIZE
 
-
-
-
 def sort(array):
 	savedIndex = 0
 	for i in range(ARRAY_SIZE):
@@ -30,15 +27,14 @@ def sort(array):
 		swap = array[i]
 		array[i] = lowestNumber
 		array[savedIndex] = swap
-	print '\nAascending order: ', array
-
+	print ('\nAascending order: ', array)
 
 def convertMatrixToArray(matrix, array):
 	for i  in range(SIZE):
 		for j in range(SIZE):
 			k = matrix[i][j]
 			array.append(k)
-	print '\nArray is: ' , array
+	print ('\nArray is: ' , array)
 
 def convertArrayToMatrix(array, matrix):
 	k = 0
@@ -46,12 +42,19 @@ def convertArrayToMatrix(array, matrix):
 		for j in range(SIZE):
 			matrix[i][j] =  array[k]
 			k = k +1
-	print '\nMatrix is: ' , matrix
+	print ('\nMatrix is: ' , matrix)
 
 def printSnakeMatrix(matrix):
-	pass
-
-
+	delta, startIndex = 0, 0
+	print ('\nMatrix Snake Style: \n')
+	for i in range(SIZE):
+		aux = (i % 2 != 0)
+		delta =   -1  if aux else 1
+		startIndex = (SIZE - 1) if  aux else 0
+		for j in range(SIZE):
+			print ('\t|', matrix[i][startIndex], end="")
+			startIndex += delta
+		print ('\n')
 
 start_time = time()
 matrix = [
@@ -62,13 +65,10 @@ matrix = [
         ]
 array = []
 
-print '\nOriginal Matrix: ', matrix
+print ('\nOriginal Matrix: ', matrix)
 convertMatrixToArray(matrix, array)
 sort(array)
 convertArrayToMatrix(array, matrix)
 printSnakeMatrix(matrix)
-
-
-
 end_time = time() - start_time
-print '\nTiempo de Ejecucion', end_time
+print ('\nExecution Time: ', end_time)
