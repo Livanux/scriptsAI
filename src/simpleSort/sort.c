@@ -26,7 +26,7 @@ void convertMatrixToArray(int[][SIZE], int[]);
 void convertArrayToMatrix(int array[], int[][SIZE]);
 
 /*
- * Prints matrix using snake style printing
+ * Prints matrix in snake-style
  * e.g.
  * Given:
  *       a, b
@@ -35,7 +35,7 @@ void convertArrayToMatrix(int array[], int[][SIZE]);
  *       a, b
  *       d, c
  */
-void printSnakeMatrix(int[][SIZE]);
+void printMatrixSnakeStyle(int[][SIZE]);
 
 int main()
 {
@@ -57,7 +57,7 @@ int main()
 
     convertArrayToMatrix(array, matrix);
 
-    printSnakeMatrix(matrix);
+    printMatrixSnakeStyle(matrix);
 
     gettimeofday(&end, NULL);
 
@@ -114,17 +114,17 @@ void convertArrayToMatrix(int array[], int matrix[][SIZE])
     }
 }
 
-void printSnakeMatrix(int matrix[][SIZE])
+void printMatrixSnakeStyle(int matrix[][SIZE])
 {
-    int i, j, delta, invertibleIndex;
+    int i, j, delta, startIndex;
 
     for (i = 0; i < SIZE; i++) {
         delta = i % 2 != 0 ? -1 : 1;
-        invertibleIndex = i % 2 != 0 ? SIZE - 1 : 0;
+        startIndex = i % 2 != 0 ? SIZE - 1 : 0;
 
         for (j = 0; j < SIZE; j++) {
-            printf("% d\t", matrix[i][invertibleIndex]);
-            invertibleIndex += delta;
+            printf("% d\t", matrix[i][startIndex]);
+            startIndex += delta;
         }
 
         printf("\n");
