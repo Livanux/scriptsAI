@@ -4,32 +4,46 @@
 ###################################################
 #                       					      #
 # A simple sorting program using square matrices  #
-# and vectors in python 2.7.X 					  #
+# and vectors in Python 					      #
 # Author: Jesús Iván Gastelum Romero              #
 # Contributors: Luis Edmundo Espinoza Larios      #
 #                       					      #
 ###################################################
-
 from time import time
 SIZE = 4
 ARRAY_SIZE = SIZE * SIZE
 
+
+#*-------------------------------*#
+#            Fuctions             #
+#*-------------------------------*#
+
 def sort(array):
+	'''
+	  Sorts the given array in ascending order
+	'''
 	savedIndex = 0
 	for i in range(ARRAY_SIZE):
 		lowestNumber = array[i]
 		for j in range(ARRAY_SIZE):
 			j = j + (i + 1)
 			if j < 16:
+				print (array[j],'----', lowestNumber)
 				if array[j] < lowestNumber:
 					lowestNumber = array[j]
 					savedIndex = j
-		swap = array[i]
-		array[i] = lowestNumber
-		array[savedIndex] = swap
+					flag = True
+		if flag:
+			swap = array[i]
+			array[i] = lowestNumber
+			array[savedIndex] = swap
+		flag = False
 	print ('\nAascending order: ', array)
 
 def convertMatrixToArray(matrix, array):
+	'''
+	Convert a square matrix into an array
+	'''
 	for i  in range(SIZE):
 		for j in range(SIZE):
 			k = matrix[i][j]
@@ -37,14 +51,27 @@ def convertMatrixToArray(matrix, array):
 	print ('\nArray is: ' , array)
 
 def convertArrayToMatrix(array, matrix):
+	'''
+	Convert an array into a matrix
+	'''
 	k = 0
 	for i  in range(SIZE):
 		for j in range(SIZE):
 			matrix[i][j] =  array[k]
-			k = k +1
+			k = k + 1
 	print ('\nMatrix is: ' , matrix)
 
 def printSnakeMatrix(matrix):
+	'''
+	  Prints matrix in snake-style
+	  e.g.
+	  Given:
+	        1, 2, 3
+	        4, 5, 6
+	  printing using the snake style:
+	        1, 2, 3
+	        6, 5, 4
+	'''
 	delta, startIndex = 0, 0
 	print ('\nMatrix Snake Style: \n')
 	for i in range(SIZE):
@@ -56,6 +83,12 @@ def printSnakeMatrix(matrix):
 			startIndex += delta
 		print ('\n')
 
+#---------------End Functions---------------#
+
+#*-----------------------------*#
+#         MAIN PROGRAM          #
+#*-----------------------------*#
+
 start_time = time()
 matrix = [
 			[5, 2, 12, 65],
@@ -66,9 +99,11 @@ matrix = [
 array = []
 
 print ('\nOriginal Matrix: ', matrix)
+
 convertMatrixToArray(matrix, array)
 sort(array)
 convertArrayToMatrix(array, matrix)
 printSnakeMatrix(matrix)
+
 end_time = time() - start_time
 print ('\nExecution Time: ', end_time)
