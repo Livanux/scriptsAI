@@ -71,22 +71,27 @@ void sort(int array[])
     int i, j;
     int lowestNumber,
         swap,
-        savedIndex;
+        savedIndex,
+        wasLowestNumberFound;
 
     for (i = 0; i < ARRAY_SIZE; i++) {
         lowestNumber = array[i];
+        wasLowestNumberFound = 0;
 
         for (j = i + 1; j < ARRAY_SIZE; j++) {
 
             if (array[j] < lowestNumber) {
                 lowestNumber = array[j];
                 savedIndex = j;
+                wasLowestNumberFound = 1;
             }
         }
 
-        swap = array[i];
-        array[i] = lowestNumber;
-        array[savedIndex] = swap;
+        if (wasLowestNumberFound > 0) {
+            swap = array[i];
+            array[i] = lowestNumber;
+            array[savedIndex] = swap;
+        }
     }
 }
 
