@@ -23,7 +23,7 @@ void convertMatrixToArray(int[][SIZE], int[]);
 /*
  * Convert an array into a matrix
  */
-void convertArrayToMatrix(int array[], int[][SIZE]);
+void convertArrayToMatrix(int[], int[][SIZE]);
 
 /*
  * Prints matrix in snake-style
