@@ -9,7 +9,7 @@ CFLAGS = -g -Wall -ansi
 # Base directory
 BASEDIR = src
 
-# Programs
+# Modules
 MODULES = $(BASEDIR)/simpleSort/simpleSort.c \
 		   $(BASEDIR)/insertionSort/insertionSort.c \
 		   $(BASEDIR)/selectionSort/selectionSort.c \
