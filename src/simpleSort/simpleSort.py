@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 #####################################################
-#													#
-# A simple sorting program using square matrices	#
-# and vectors in python 							#
-# Author: Jesús Iván Gastelum Romero				#
-# Contributors: Luis Edmundo Espinoza Larios		#
-#													#
+#													
+# A simple sorting program using square matrices	
+# and vectors in python 							
+# Author: Jesús Iván Gastelum Romero				
+# Contributors: Luis Edmundo Espinoza Larios		
+#													
 #####################################################
 from time import time
 SIZE = 4

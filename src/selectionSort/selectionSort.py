@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 ###################################################
-#                       					      #
-# A simple sorting program using Insertion Sort   #
-# and vectors in Python 					      #
-# Author: Jesús Iván Gastelum Romero              #
-# Contributors: Luis Edmundo Espinoza Larios      #
-#                       					      #
+#                       					      
+# A simple sorting program using Insertion Sort   
+# and vectors in Python 					      
+# Author: Jesús Iván Gastelum Romero              
+# Contributors: Luis Edmundo Espinoza Larios     
+#                       					      
 ###################################################
 
 from time import time
