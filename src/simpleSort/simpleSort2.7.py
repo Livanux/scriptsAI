@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-#####################################################
-#													#
-# A simple sorting program using square matrices	#
-# and vectors in python 							#
-# Author: Jesús Iván Gastelum Romero				#
-# Contributors: Luis Edmundo Espinoza Larios		#
-#													#
-#####################################################
+###################################################
+#                       					      #
+# A simple sorting program using square matrices  #
+# and vectors in Python 2.7.x				      #
+# Author: Jesús Iván Gastelum Romero              #
+# Contributors: Luis Edmundo Espinoza Larios      #
+#                       					      #
+###################################################
 from time import time
 SIZE = 4
 ARRAY_SIZE = SIZE * SIZE
@@ -28,7 +28,7 @@ def sort(array):
 		for j in range(ARRAY_SIZE):
 			j = j + (i + 1)
 			if j < 16:
-				print (array[j],'----', lowestNumber)
+				#print (array[j],'----', lowestNumber)
 				if array[j] < lowestNumber:
 					lowestNumber = array[j]
 					savedIndex = j
@@ -38,7 +38,7 @@ def sort(array):
 			array[i] = lowestNumber
 			array[savedIndex] = swap
 		flag = False
-	print ('\nAascending order: ', array)
+	print '\nAascending order: ', array
 
 def convertMatrixToArray(matrix, array):
 	'''
@@ -48,7 +48,7 @@ def convertMatrixToArray(matrix, array):
 		for j in range(SIZE):
 			k = matrix[i][j]
 			array.append(k)
-	print ('\nArray is: ' , array)
+	print '\nArray is: ' , array
 
 def convertArrayToMatrix(array, matrix):
 	'''
@@ -59,7 +59,7 @@ def convertArrayToMatrix(array, matrix):
 		for j in range(SIZE):
 			matrix[i][j] =  array[k]
 			k = k + 1
-	print ('\nMatrix is: ' , matrix)
+	print '\nMatrix is: ' , matrix
 
 def printSnakeMatrix(matrix):
 	'''
@@ -73,15 +73,15 @@ def printSnakeMatrix(matrix):
 	        6, 5, 4
 	'''
 	delta, startIndex = 0, 0
-	print ('\nMatrix Snake Style: \n')
+	print '\nMatrix Snake Style: \n'
 	for i in range(SIZE):
 		aux = (i % 2 != 0)
 		delta =   -1  if aux else 1
 		startIndex = (SIZE - 1) if  aux else 0
 		for j in range(SIZE):
-			print ('\t|', matrix[i][startIndex], end="")
+			print '\t|', matrix[i][startIndex],
 			startIndex += delta
-		print ('\n')
+		print '\n'
 
 #---------------End Functions---------------#
 
@@ -98,7 +98,7 @@ matrix = [
         ]
 array = []
 
-print ('\nOriginal Matrix: ', matrix)
+print '\nOriginal Matrix: ', matrix
 
 convertMatrixToArray(matrix, array)
 sort(array)
@@ -106,4 +106,4 @@ convertArrayToMatrix(array, matrix)
 printSnakeMatrix(matrix)
 
 end_time = time() - start_time
-print ('\nExecution Time: ', end_time)
+print '\nExecution Time: ', end_time
