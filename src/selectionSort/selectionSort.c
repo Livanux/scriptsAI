@@ -5,8 +5,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
-#include "arrayUtil.h"
+#include "util.h"
 
 /*
  * Sorts the given array using the selection sort algorithm
@@ -15,8 +17,12 @@ void sort(int[]);
 
 int main()
 {
-    static int array[SIZE] = {7, -5 , 0, 2, 16, -9, 21, -874, 0, 8, 16, -210};
+    static int array[SIZE];
     struct timeval start, end;
+
+    srand(time(NULL));
+
+    generateArray(array);
 
     gettimeofday(&start, NULL);
 
@@ -32,7 +38,7 @@ int main()
 
 void sort(int array[])
 {
-    int i, j, lowestNumberIndex, aux;
+    int i, j, lowestNumberIndex;
 
     for (i = 0; i < SIZE - 1; i++) {
         lowestNumberIndex = i;
@@ -44,8 +50,6 @@ void sort(int array[])
             }
         }
 
-        aux = array[i];
-        array[i] = array[lowestNumberIndex];
-        array[lowestNumberIndex] = aux;
+        swap(&array[i], &array[lowestNumberIndex]);
     }
 }

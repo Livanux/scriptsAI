@@ -5,8 +5,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
-#include "arrayUtil.h"
+#include "util.h"
 
 /*
  * Sorts the given array using the heapsort algorithm
@@ -23,15 +25,14 @@ void heapify(int[], int);
  */
 void siftDown(int[], int, int);
 
-/*
- * Swap util
- */
-void swap(int *, int *);
-
 int main()
 {
-    static int array[SIZE] = {7, -5 , 0, 2, 16, -9, 21, -874, 0, 8, 16, -210};
+    static int array[SIZE];
     struct timeval start, end;
+
+    srand(time(NULL));
+
+    generateArray(array);
 
     gettimeofday(&start, NULL);
 
@@ -90,12 +91,4 @@ void siftDown(int array[], int start, int end)
         swap(&array[start], &array[largest]);
         siftDown(array, largest, end);
     }
-}
-
-void swap(int * a, int * b)
-{
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
 }

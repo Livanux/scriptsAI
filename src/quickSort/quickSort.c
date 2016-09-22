@@ -5,8 +5,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
-#include "arrayUtil.h"
+#include "util.h"
 
 /*
  * Sorts the given array using the quicksort algorithm
@@ -18,15 +20,14 @@ void sort(int[], int, int);
  */
 int partition(int[], int, int);
 
-/*
- * Swap utility
- */
-void swap(int *, int *);
-
 int main()
 {
-    static int array[SIZE] = {7, -5 , 0, 2, 16, -9, 21, -874, 0, 8, 16, -210};
+    static int array[SIZE];
     struct timeval start, end;
+
+    srand(time(NULL));
+
+    generateArray(array);
 
     gettimeofday(&start, NULL);
 
@@ -66,12 +67,4 @@ int partition(int array[], int left, int right)
     swap(&array[i], &array[right]);
 
     return i;
-}
-
-void swap(int * a, int * b)
-{
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
 }

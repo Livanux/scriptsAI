@@ -5,8 +5,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
-#include "arrayUtil.h"
+#include "util.h"
 
 /*
  * Sorts the given array using the mergesort algorithm
@@ -30,9 +32,13 @@ void copyArray(int[], int, int, int[]);
 
 int main()
 {
-    static int array[SIZE] = {7, -5 , 0, 2, 16, -9, 21, -874, 0, 8, 16, -210};
+    static int array[SIZE];
     static int workArray[SIZE];
     struct timeval start, end;
+
+    srand(time(NULL));
+
+    generateArray(array);
 
     gettimeofday(&start, NULL);
 

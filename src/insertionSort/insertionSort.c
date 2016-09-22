@@ -5,8 +5,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
-#include "arrayUtil.h"
+#include "util.h"
 
 /*
  * Sorts a given array using insertion sort algorithm
@@ -15,8 +17,12 @@ void sort(int[]);
 
 int main()
 {
-    static int array[SIZE] = {7, -5, 0, 2, 16, -9, 21, -874, 0, 8, 16, -210};
+    static int array[SIZE];
     struct timeval start, end;
+
+    srand(time(NULL));
+
+    generateArray(array);
 
     gettimeofday(&start, NULL);
 
@@ -32,15 +38,15 @@ int main()
 
 void sort(int array[])
 {
-    int i, j, aux;
+    int i, j, temp;
 
     for (i = 1; i < SIZE; i++) {
         j = i;
 
         while (j > 0 && array[j - 1] > array[j]) {
-            aux = array[j];
+            temp = array[j];
             array[j] = array[j - 1];
-            array[j - 1] = aux;
+            array[j - 1] = temp;
             j -= 1;
         }
     }
