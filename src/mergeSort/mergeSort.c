@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include <sys/time.h>
-#include <string.h>
 #include "arrayUtil.h"
 
 /*
@@ -14,10 +13,19 @@
  */
 void sort(int[], int[], int);
 
+/*
+ * Merge two sub arrays
+ */
 void merge(int[], int, int, int[]);
 
+/*
+ * Used in merge
+ */
 void topDownMerge(int[], int, int, int, int[]);
 
+/*
+ * Copies from start to end the second array into the first
+ */
 void copyArray(int[], int, int, int[]);
 
 int main()
@@ -65,11 +73,9 @@ void topDownMerge(int array[], int start, int middle, int end, int workArray[])
     for (k = start; k < end; k++) {
 
         if (i < middle && (j >= end || array[i] <= array[j])) {
-            workArray[k] = array[i];
-            i++;
+            workArray[k] = array[i++];
         } else {
-            workArray[k] = array[j];
-            j++;
+            workArray[k] = array[j++];
         }
     }
 }
