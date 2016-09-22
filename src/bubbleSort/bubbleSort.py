@@ -3,7 +3,7 @@
 
 ###################################################
 #                       					      
-# A simple sorting program using Insertion Sort   
+# A simple sorting program using Bubble Sort   
 # and vectors in Python 					      
 # Author: Jesús Iván Gastelum Romero              
 # Contributors: Luis Edmundo Espinoza Larios      

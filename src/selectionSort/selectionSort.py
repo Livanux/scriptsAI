@@ -1,9 +1,9 @@
- #!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 ###################################################
 #                       					      
-# A simple sorting program using Insertion Sort   
+# A simple sorting program using Selection Sort   
 # and vectors in Python 					      
 # Author: Jesús Iván Gastelum Romero              
 # Contributors: Luis Edmundo Espinoza Larios     
