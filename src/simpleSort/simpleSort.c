@@ -61,7 +61,7 @@ int main()
 
     gettimeofday(&end, NULL);
 
-    printf ("Execution time: %f us\n", (double) (end.tv_usec - start.tv_usec) / 1000000 + (double) (end.tv_sec - start.tv_sec));
+    printf("Execution time: %f us\n", (double) (end.tv_usec - start.tv_usec) / 1000000 + (double) (end.tv_sec - start.tv_sec));
 
     return 0;
 }
