@@ -32,4 +32,4 @@ all: clean $(MODULES)
 	$(CC) $(CFLAGS) -o bin/mergeSort $(BASEDIR)/mergeSort/mergeSort.c $(UTILDIR)/util.c -I $(UTILDIR)
 
 clean:
-	rm -r ./bin
+	rm -rf ./bin
