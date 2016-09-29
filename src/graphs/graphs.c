@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#define SIZE 5
+#define SIZE 6
 
 void goTo(int[][SIZE], const int, const int);
 
@@ -21,10 +21,11 @@ int main()
         {2, 1, 3},
         {3, 2, 4, 5},
         {4, 1, 3, 5},
-        {5, 3, 4, 6}
+        {5, 3, 4, 6},
+        {6, 5}
     };
 
-    goTo(matrix, 3, 6);
+    goTo(matrix, 4, 6);
 
     return 0;
 }
