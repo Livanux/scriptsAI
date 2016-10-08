@@ -6,72 +6,81 @@
 
 #include <stdio.h>
 
-#define SIZE 6
+#define SIZE 10
 
-void goTo(int[][SIZE], const int, const int);
+void explore(int[][SIZE], int);
 
-int next(int[][SIZE], int[], int);
+void DFS(int[][SIZE], int[], int);
 
-int wasVisited(int[], int);
+int getIndex(int[][SIZE], int);
 
 int main()
 {
-    int matrix[SIZE][SIZE] = {
-        {1, 2, 4},
-        {2, 1, 3},
-        {3, 2, 4, 5},
-        {4, 1, 3, 5},
-        {5, 3, 4, 6},
-        {6, 5}
+    int graph[SIZE][SIZE] = {
+        {1, 2, 4, 8},
+        {2, 1, 3, 4},
+        {3, 2, 6, 7},
+        {4, 1, 2},
+        {5, 6, 9},
+        {6, 3, 5, 7},
+        {7, 3, 6},
+        {8, 1},
+        {9, 5},
+        {10},
     };
 
-    goTo(matrix, 4, 6);
+    printf("With 1: "); explore(graph, 1);
+    printf("With 2: "); explore(graph, 2);
+    printf("With 3: "); explore(graph, 3);
+    printf("With 4: "); explore(graph, 4);
+    printf("With 5: "); explore(graph, 5);
+    printf("With 6: "); explore(graph, 6);
+    printf("With 7: "); explore(graph, 7);
+    printf("With 8: "); explore(graph, 8);
+    printf("With 9: "); explore(graph, 9);
+    printf("With 10: "); explore(graph, 10);
 
     return 0;
 }
 
-void goTo(int matrix[][SIZE], const int from, const int to)
+void explore(int graph[][SIZE], int start)
 {
-    int current = from, k = 0;
-    static int array[SIZE];
+    int startIndex, visited[SIZE] = {0};
 
-    while (current != to) {
-        printf("%d -> ", current);
-        array[k++] = current;
-        current = next(matrix, array, current);
-    }
+    startIndex = getIndex(graph, start);
+    visited[startIndex] = 1;
 
-    printf("%d\n", current);
+    DFS(graph, visited, start);
+
+    printf("\n");
 }
 
-int next(int matrix[][SIZE], int array[], int node)
+void DFS(int graph[][SIZE], int visited[], int current)
+{
+    int j, visitedIndex, currentIndex = getIndex(graph, current);
+
+    printf("%d -> ", graph[currentIndex][0]);
+
+    visited[currentIndex] = 1;
+
+    for (j = 0; j < SIZE && graph[currentIndex][j] != 0; j++) {
+        visitedIndex = getIndex(graph, graph[currentIndex][j]);
+        if (!visited[visitedIndex]) {
+            DFS(graph, visited, graph[currentIndex][j]);
+        }
+    }
+}
+
+int getIndex(int graph[][SIZE], int number)
 {
     int i;
 
     for (i = 0; i < SIZE; i++) {
 
-        if (matrix[node - 1][i] != node) {
-
-            if (!wasVisited(array, matrix[node - 1][i])) {
-                return matrix[node - 1][i];
-            }
+        if (graph[i][0] == number) {
+            return i;
         }
     }
 
-    return 0;
-}
-
-int wasVisited(int array[], int number)
-{
-    int i;
-
-
-    for (i = 0; i < SIZE; i++) {
-
-        if (array[i] == number) {
-            return 1;
-        }
-    }
-
-    return 0;
+    return -1;
 }
