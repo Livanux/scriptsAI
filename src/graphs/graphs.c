@@ -29,7 +29,7 @@ int main()
         {10},
     };
 
-    goTo(graph, 10, 8);
+    goTo(graph, 9, 8);
 
     return 0;
 }
