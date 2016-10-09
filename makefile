@@ -36,7 +36,7 @@ mergeSort: $(BASEDIR)/mergeSort/mergeSort.c
 	$(CC) $(CFLAGS) -o bin/mergeSort $(BASEDIR)/mergeSort/mergeSort.c $(UTILDIR)/util.c -I $(UTILDIR)
 
 graphs: $(BASEDIR)/graphs/graphs.c
-	$(CC) $(CFLAGS) -o bin/graphs $(BASEDIR)/graphs/graphs.c $(UTILDIR)/stack.c -I $(UTILDIR)
+	$(CC) $(CFLAGS) -o bin/graphs $(BASEDIR)/graphs/graphs.c 
 
 makedir:
 	mkdir ./bin
