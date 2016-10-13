@@ -31,7 +31,7 @@ EXIT =True
 def printIntructions(op_board):
 	global menu
 	menu = ''
-	print '\tInstructions: Choose the place that you want.\n\tPor example: \tPress 1 for 1A or 9 for 3C place.\n'
+	print '\tInstructions: Choose the place that you want.\n\tPor example: Press 1 for 1A or 9 for 3C place.\n'
 
 	for i, j in op_board.items():
 		if j == '1C' or j == '2C' or j == '3C':
@@ -61,7 +61,7 @@ def whosNext(players):
 		players[5] = True
 
 def printPlay(board):
-	os.system("clear")
+	os.system("cls")
 	print menu , '\n'
 	printBoard(board)
 
@@ -96,7 +96,7 @@ def rivalTurn(board, players):
 #------------------
 
 printIntructions(op_board)
-print 'Do you want start? \n1. Si\n2. No\n'
+print 'Are you ready!? \n1. Yes!\n2. No.\n'
 s = input('-> ')
 if s == 2:
 	EXIT = False
