@@ -34,24 +34,22 @@ def heapify(array, count):
 		start -= 1
 
 def siftDown(array, start, end):
-	left = 2 * start
+	left  = 2 * start
 	right = 2 * start + 1
 	if (left <= end and array[left] > array[start]):
 		largest = left
 	else:
 		largest = start
-
 	if (right <= end and array[right] > array[largest]):
 		largest = right
-
 	print largest , start, array[start],array[largest]
+
 	if (largest != start):
 		temp = array[start]
 		array[start] = array[largest] 
 		array[largest] = temp
 		siftDown(array, largest, end)
 	
-
 	return array
 
 
@@ -60,7 +58,6 @@ def siftDown(array, start, end):
 #*-----------------------------*#
 
 VECTOR = [7, -5 , 0, 16, 2, -9, 21, -874, 0, 8, 16, -210]
-
 v = sort(VECTOR, len(VECTOR))
 
 
