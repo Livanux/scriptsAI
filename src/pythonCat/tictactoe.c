@@ -7,7 +7,7 @@
 #define BOARD_SIZE 9
 #define WIN_ROWS 8
 #define WIN_COLUMNS 3
-#define COULD_ROWS 20
+#define COULD_ROWS 21
 #define COULD_COLUMNS 2
 #define O 1
 #define X 2
@@ -24,7 +24,7 @@ static const int couldPattern[COULD_ROWS][COULD_COLUMNS + 1] = {
     {1, 2, 3}, {1, 5, 9}, {1, 4, 7}, {1, 3, 2}, {1, 9, 5}, {1, 7, 4},
     {2, 3, 1}, {2, 5, 8}, {2, 8, 5}, {3, 6, 9}, {3, 9, 6}, {4, 7, 1},
     {4, 5, 6}, {4, 6, 5}, {7, 8, 9}, {7, 9, 8}, {5, 6, 4}, {8, 9, 7},
-    {5, 9, 1}, {8, 5, 2}
+    {5, 9, 1}, {8, 5, 2}, {3, 5, 7}
 };
 
 void printBoard(int[]);
@@ -149,7 +149,7 @@ int isGameOver(int board[])
 
 void computeSlot(int board[], int * slot)
 {
-    int corners[4] = {1, 3, 7, 9}, matchedPattern[COULD_COLUMNS + 1];
+    int temp, corners[4] = {1, 3, 7, 9}, star[4] = {2, 4, 6, 8}, matchedPattern[COULD_COLUMNS + 1];
 
     if (isSlotEmpty(board, 5)) {
         *slot = 5;
@@ -157,8 +157,10 @@ void computeSlot(int board[], int * slot)
         *slot = matchedPattern[2];
     } else if (couldWin(board, O, matchedPattern)) {
         *slot = matchedPattern[2];
+    } else if (isSlotEmpty(board, (temp = corners[rand() % 4]))){
+        *slot = temp;
     } else {
-        *slot = corners[rand() % 4];
+        *slot = star[rand() % 4];
     }
 }
 
