@@ -8,9 +8,9 @@
 
 #define SIZE 10
 
-void explore(int[][SIZE], int);
+void goTo(int[][SIZE], int, int);
 
-void DFS(int[][SIZE], int[], int);
+int dfs(int[][SIZE], int[], int, int);
 
 int getIndex(int[][SIZE], int);
 
@@ -29,46 +29,43 @@ int main()
         {10},
     };
 
-    printf("With 1: "); explore(graph, 1);
-    printf("With 2: "); explore(graph, 2);
-    printf("With 3: "); explore(graph, 3);
-    printf("With 4: "); explore(graph, 4);
-    printf("With 5: "); explore(graph, 5);
-    printf("With 6: "); explore(graph, 6);
-    printf("With 7: "); explore(graph, 7);
-    printf("With 8: "); explore(graph, 8);
-    printf("With 9: "); explore(graph, 9);
-    printf("With 10: "); explore(graph, 10);
+    goTo(graph, 9, 8);
 
     return 0;
 }
 
-void explore(int graph[][SIZE], int start)
+void goTo(int graph[][SIZE], int start, int end)
 {
     int startIndex, visited[SIZE] = {0};
 
     startIndex = getIndex(graph, start);
     visited[startIndex] = 1;
 
-    DFS(graph, visited, start);
+    dfs(graph, visited, start, end);
 
     printf("\n");
 }
 
-void DFS(int graph[][SIZE], int visited[], int current)
+int dfs(int graph[][SIZE], int visited[], int current, int end)
 {
-    int j, visitedIndex, currentIndex = getIndex(graph, current);
+    int i, visitedIndex, currentIndex = getIndex(graph, current);
 
     printf("%d -> ", graph[currentIndex][0]);
 
+    if (current == end) {
+        return 1;
+    }
+
     visited[currentIndex] = 1;
 
-    for (j = 0; j < SIZE && graph[currentIndex][j] != 0; j++) {
-        visitedIndex = getIndex(graph, graph[currentIndex][j]);
+    for (i = 0; i < SIZE && graph[currentIndex][i] != 0; i++) {
+        visitedIndex = getIndex(graph, graph[currentIndex][i]);
         if (!visited[visitedIndex]) {
-            DFS(graph, visited, graph[currentIndex][j]);
+            if (dfs(graph, visited, graph[currentIndex][i], end)) return 1;
         }
     }
+
+    return 0;
 }
 
 int getIndex(int graph[][SIZE], int number)
