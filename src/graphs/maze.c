@@ -1,5 +1,6 @@
 /*
  * Author Luis Edmundo Espinoza Larios
+ * Collaborators Jesús Iván Gastelum Romero
  */
 
 #include <stdio.h>
