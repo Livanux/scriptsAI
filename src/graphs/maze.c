@@ -5,15 +5,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+/*#include <windows.h> */
 
-#define SIZE 10
+#define SIZE 25
 
 typedef struct {
     int x;
     int y;
 } vertex;
 
-void dfs(int [][SIZE], int[][SIZE], vertex[], vertex);
+void dfs(int [][SIZE], int[][SIZE], vertex);
 
 void getAdjacentVertices(int[][SIZE], vertex[], vertex);
 
@@ -31,10 +32,9 @@ int main(int argc, char * argv[])
 {
     static int visited[SIZE][SIZE];
     int maze[SIZE][SIZE];
-    vertex vertices[4], v = { .x = 1, .y = 0 };
-    initVertices(vertices);
+    vertex v = { .x = 1, .y = 0 };
     createMazeFromFile(maze, argv[1]);
-    dfs(maze, visited, vertices, v);
+    dfs(maze, visited, v);
     return 0;
 }
 
@@ -74,15 +74,17 @@ int isOutOfBounds(int idx)
     return idx < 0 || idx >= SIZE;
 }
 
-void dfs(int maze[][SIZE], int visited[][SIZE], vertex vertices[], vertex v)
+void dfs(int maze[][SIZE], int visited[][SIZE], vertex v)
 {
     int i;
+    vertex vertices[4];
     visited[v.x][v.y] = 1;
+    initVertices(vertices);
     getAdjacentVertices(maze, vertices, v);
     printMazeWithVertex(maze, v);
     for (i = 0; i < SIZE && (vertices[i].x != -1 && vertices[i].y != -1); i++) {
         if (visited[vertices[i].x][vertices[i].y] == 0) {
-            dfs(maze, visited, vertices, vertices[i]);
+            dfs(maze, visited, vertices[i]);
         }
     }
 }
@@ -90,7 +92,7 @@ void dfs(int maze[][SIZE], int visited[][SIZE], vertex vertices[], vertex v)
 void printMazeWithVertex(int maze[][SIZE], vertex v)
 {
     int i, j;
-
+    /*system("cls");*/
     for (i = 0; i < SIZE; i++) {
 
         for (j = 0; j < SIZE; j++) {
@@ -98,7 +100,7 @@ void printMazeWithVertex(int maze[][SIZE], vertex v)
             if (v.x == i && v.y == j) {
                 printf("o ");
             } else {
-                printf("%c ", maze[i][j] == 1 ? '#' : ' ');
+                printf("%c ", maze[i][j] == 1 ? '.' : ' ');
             }
         }
 
@@ -106,6 +108,8 @@ void printMazeWithVertex(int maze[][SIZE], vertex v)
     }
 
     printf("\n");
+    /*Sleep(100);*/
+    
 }
 
 void createMazeFromFile(int maze[][SIZE], char * filename)
