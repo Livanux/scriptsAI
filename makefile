@@ -12,7 +12,7 @@ BASEDIR = src
 # Util dir
 UTILDIR = $(BASEDIR)/util
 
-all: clean makedir simpleSort bubbleSort insertionSort selectionSort quickSort heapSort mergeSort graphs
+all: clean makedir simpleSort bubbleSort insertionSort selectionSort quickSort heapSort mergeSort graphs maze
 
 simpleSort: $(BASEDIR)/simpleSort/simpleSort.c
 	$(CC) $(CFLAGS) -o bin/simpleSort $(BASEDIR)/simpleSort/simpleSort.c $(UTILDIR)/util.c -I $(UTILDIR)
@@ -36,7 +36,10 @@ mergeSort: $(BASEDIR)/mergeSort/mergeSort.c
 	$(CC) $(CFLAGS) -o bin/mergeSort $(BASEDIR)/mergeSort/mergeSort.c $(UTILDIR)/util.c -I $(UTILDIR)
 
 graphs: $(BASEDIR)/graphs/graphs.c
-	$(CC) $(CFLAGS) -o bin/graphs $(BASEDIR)/graphs/graphs.c 
+	$(CC) $(CFLAGS) -o bin/graphs $(BASEDIR)/graphs/graphs.c
+
+maze: $(BASEDIR)/graphs/maze.c
+	$(CC) $(CFLAGS) -o bin/maze $(BASEDIR)/graphs/maze.c
 
 makedir:
 	mkdir ./bin
