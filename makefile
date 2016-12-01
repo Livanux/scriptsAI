@@ -41,6 +41,9 @@ graphs: $(BASEDIR)/graphs/graphs.c
 maze: $(BASEDIR)/graphs/maze.c
 	$(CC) $(CFLAGS) -o bin/maze $(BASEDIR)/graphs/maze.c
 
+flow: $(BASEDIR)/graphs/flow.c
+	$(CC) $(CFLAGS) -o bin/flow $(BASEDIR)/graphs/flow.c
+
 makedir:
 	mkdir ./bin
 

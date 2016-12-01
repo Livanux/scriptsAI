@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-/*#include <windows.h> */
 
 #define SIZE 25
 
@@ -14,7 +13,11 @@ typedef struct {
     int y;
 } vertex;
 
-void dfs(int [][SIZE], int[][SIZE], vertex);
+void dfs(int[][SIZE], int[][SIZE], vertex);
+
+int deadEnd(vertex[]);
+
+void dfsVisit(int[][SIZE], int[][SIZE], vertex);
 
 void getAdjacentVertices(int[][SIZE], vertex[], vertex);
 
@@ -28,14 +31,30 @@ void createMazeFromFile(int[][SIZE], char *);
 
 void convertArrayToMatrix(int[], int[][SIZE]);
 
+void printMatrix(int[][SIZE]);
+
 int main(int argc, char * argv[])
 {
-    static int visited[SIZE][SIZE];
     int maze[SIZE][SIZE];
+    static int visited[SIZE][SIZE];
     vertex v = { .x = 1, .y = 0 };
     createMazeFromFile(maze, argv[1]);
-    dfs(maze, visited, v);
+    dfsVisit(maze, visited, v);
     return 0;
+}
+
+void printMatrix(int m[][SIZE])
+{
+    int i, j;
+
+    for (i = 0; i < SIZE; i++) {
+
+        for (j = 0; j < SIZE; j++) {
+            printf("%d ", m[i][j]);
+        }
+
+        printf("\n");
+    }
 }
 
 void initVertices(vertex vertices[])
@@ -78,11 +97,10 @@ void dfs(int maze[][SIZE], int visited[][SIZE], vertex v)
 {
     int i;
     vertex vertices[4];
-    visited[v.x][v.y] = 1;
     initVertices(vertices);
     getAdjacentVertices(maze, vertices, v);
     printMazeWithVertex(maze, v);
-    for (i = 0; i < SIZE && (vertices[i].x != -1 && vertices[i].y != -1); i++) {
+    for (i = 0; i < 4 && vertices[i].x != -1 && vertices[i].y != -1; i++) {
         if (visited[vertices[i].x][vertices[i].y] == 0) {
             dfs(maze, visited, vertices[i]);
         }
@@ -92,7 +110,7 @@ void dfs(int maze[][SIZE], int visited[][SIZE], vertex v)
 void printMazeWithVertex(int maze[][SIZE], vertex v)
 {
     int i, j;
-    /*system("cls");*/
+
     for (i = 0; i < SIZE; i++) {
 
         for (j = 0; j < SIZE; j++) {
@@ -108,8 +126,6 @@ void printMazeWithVertex(int maze[][SIZE], vertex v)
     }
 
     printf("\n");
-    /*Sleep(100);*/
-    
 }
 
 void createMazeFromFile(int maze[][SIZE], char * filename)
@@ -139,4 +155,33 @@ void convertArrayToMatrix(int array[], int matrix[][SIZE])
             matrix[i][j] = array[k++];
         }
     }
+}
+
+void dfsVisit(int maze[][SIZE], int visited[][SIZE], vertex v)
+{
+    int i;
+    vertex vertices[4];
+    visited[v.x][v.y] = 1;
+    initVertices(vertices);
+    getAdjacentVertices(maze, vertices, v);
+    printMazeWithVertex(maze, v);
+    for (i = 0; i < 4 && (vertices[i].x != -1 && vertices[i].y != -1); i++) {
+        if (visited[vertices[i].x][vertices[i].y] == 0) {
+            visited[vertices[i].x][vertices[i].y] = 1;
+            dfsVisit(maze, visited, vertices[i]);
+        }
+    }
+}
+
+int deadEnd(vertex vertices[])
+{
+    int i, count = 0;
+
+    for (i = 0; i < 4; i++) {
+        if (vertices[i].x == -1 && vertices[i].x == -1) {
+            count++;
+        }
+    }
+
+    return count == 4;
 }

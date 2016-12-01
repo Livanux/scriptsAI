@@ -1,11 +1,12 @@
 
 #include "stack.h"
 
-void push(stack * stk, int number)
+void push(stack * stk, int x, int y)
 {
     stack new;
     new = (stack) malloc(sizeof(STACK));
-    new->number = number;
+    new->x = x;
+    new->y = y;
     new->next = *stk;
     *stk = new;
 }

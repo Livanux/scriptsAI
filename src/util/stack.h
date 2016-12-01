@@ -6,14 +6,15 @@
 #include <stdio.h>
 
 struct stack {
-    int number;
+    int x;
+    int y;
     struct stack * next;
 };
 
 typedef struct stack STACK;
 typedef STACK * stack;
 
-void push(stack *, int);
+void push(stack *, int x, int y);
 
 int pop(stack *);
 
