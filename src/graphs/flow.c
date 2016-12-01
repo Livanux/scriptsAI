@@ -9,7 +9,7 @@ typedef struct {
 
 void printBoard(int[][SIZE], vertex);
 
-void dfs(int[][SIZE], int[][SIZE], vertex);
+int dfs(int[][SIZE], int[][SIZE], vertex);
 
 void getAdjacentVertices(int[][SIZE], vertex[], vertex);
 
@@ -62,21 +62,29 @@ void printBoard(int board[][SIZE], vertex v)
     printf("\n");
 }
 
-void dfs(int board[][SIZE], int visited[][SIZE], vertex v)
+int dfs(int board[][SIZE], int visited[][SIZE], vertex v)
 {
     int i, x, y;
     vertex vertices[4];
     visited[v.x][v.y] = 1;
+
     printBoard(board, v);
+
+    if (v.x == 1 && v.y == 4) {
+        return 1;
+    }
+
     initVertices(vertices);
     getAdjacentVertices(board, vertices, v);
     for (i = 0; i < 4 && vertices[i].x != -1 && vertices[i].y != -1; i++) {
         x = vertices[i].x;
         y = vertices[i].y;
         if (visited[x][y] != 1) {
-            dfs(board, visited, vertices[i]);
+            if (dfs(board, visited, vertices[i])) return 1;
         }
     }
+
+    return 0;
 }
 
 void getAdjacentVertices(int board[][SIZE], vertex vertices[], vertex v)
