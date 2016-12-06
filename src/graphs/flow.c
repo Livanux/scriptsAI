@@ -2,14 +2,16 @@
 
 #define SIZE 5
 
+#define VERTICES_SIZE 4
+
 typedef struct {
     int x;
     int y;
 } vertex;
 
-void printBoard(int[][SIZE], vertex);
+void printBoard(int[][SIZE], vertex, int);
 
-int dfs(int[][SIZE], int[][SIZE], vertex, vertex);
+int dfs(int[][SIZE], int[][SIZE], vertex, vertex, int);
 
 void getAdjacentVertices(int[][SIZE], vertex[], vertex, vertex);
 
@@ -30,11 +32,21 @@ int main()
         {0, 0, 0, 0, 0},
         {4, 3, 0, 0, 0}
     }, visited[SIZE][SIZE];
-    int result;
-    vertex v = { .x = 0, .y = 1 }, y = { .x = 2, .y = 2 };
-    result = dfs(board, visited, v, y);
-    printMatrix(visited);
-    printf("Result: %d\n", result);
+    vertex vertices[VERTICES_SIZE][2] = {
+        {{ .x = 0, .y = 0 }, { .x = 2, .y = 0 }},
+        {{ .x = 0, .y = 1 }, { .x = 2, .y = 2 }},
+        {{ .x = 1, .y = 2 }, { .x = 4, .y = 1 }},
+        {{ .x = 1, .y = 3 }, { .x = 4, .y = 0 }}
+    };
+    int i;
+
+    for (i = 0; i < VERTICES_SIZE; i++) {
+
+        if (dfs(board, visited, vertices[i][0], vertices[i][1], i + 1) == 0) {
+            break;
+        }
+    }
+
     return 0;
 }
 
@@ -48,26 +60,21 @@ void initVertices(vertex vertices[])
     }
 }
 
-void printBoard(int board[][SIZE], vertex v)
+void printBoard(int board[][SIZE], vertex v, int idx)
 {
     int i, j;
 
     for (i = 0; i < SIZE; i++) {
 
         for (j = 0; j < SIZE; j++) {
-
-            if (v.x == i && v.y == j) {
-                printf("* ");
-            } else {
-                printf("%c ", board[i][j] == 0 ? ' ' : board[i][j] + '0');
-            }
+            printf("%c ", board[i][j] + '0');
         }
         printf("\n");
     }
     printf("\n");
 }
 
-int dfs(int board[][SIZE], int visited[][SIZE], vertex from, vertex to)
+int dfs(int board[][SIZE], int visited[][SIZE], vertex from, vertex to, int idx)
 {
     int i, x, y;
     vertex vertices[4];
@@ -75,7 +82,9 @@ int dfs(int board[][SIZE], int visited[][SIZE], vertex from, vertex to)
 
     visited[from.x][from.y] = 1;
 
-    printBoard(board, from);
+    board[from.x][from.y] = idx;
+
+    printBoard(board, from, idx);
 
     if (from.x == to.x && from.y == to.y) {
         return 1;
@@ -85,14 +94,14 @@ int dfs(int board[][SIZE], int visited[][SIZE], vertex from, vertex to)
     getAdjacentVertices(board, vertices, from, to);
 
     if (isAdjacentPair(vertices, to, &pair)) {
-        return dfs(board, visited, pair, to);
+        return dfs(board, visited, pair, to, idx);
     }
 
     for (i = 0; i < 4 && vertices[i].x != -1 && vertices[i].y != -1; i++) {
         x = vertices[i].x;
         y = vertices[i].y;
         if (visited[x][y] != 1) {
-            if (dfs(board, visited, vertices[i], to)) return 1;
+            if (dfs(board, visited, vertices[i], to, idx)) return 1;
         }
     }
 
@@ -103,10 +112,10 @@ void getAdjacentVertices(int board[][SIZE], vertex vertices[], vertex v, vertex 
 {
     int i, j, x, y;
     static int offsets[4][2] = {
-        {-1, 0}, // ^
-        {0,  1}, // >
-        {1,  0}, // v
-        {0, -1}, // <
+        {-1, 0},
+        {0,  1},
+        {1,  0},
+        {0, -1},
     };
 
     for (i = 0, j = 0; i < 4; i++) {
