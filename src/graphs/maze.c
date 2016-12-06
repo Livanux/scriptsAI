@@ -167,7 +167,6 @@ void dfsVisit(int maze[][SIZE], int visited[][SIZE], vertex v)
     printMazeWithVertex(maze, v);
     for (i = 0; i < 4 && (vertices[i].x != -1 && vertices[i].y != -1); i++) {
         if (visited[vertices[i].x][vertices[i].y] == 0) {
-            visited[vertices[i].x][vertices[i].y] = 1;
             dfsVisit(maze, visited, vertices[i]);
         }
     }
