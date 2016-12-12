@@ -2,7 +2,7 @@
 
 #define SIZE 5
 
-#define VERTICES_SIZE 4
+#define VERTICES_SIZE 5
 
 typedef struct {
     int x;
@@ -28,23 +28,21 @@ int main()
     static int board[SIZE][SIZE] = {
         {1, 2, 0, 0, 0},
         {0, 0, 3, 4, 0},
-        {1, 0, 2, 0, 0},
+        {1, 0, 2, 0, 5},
         {0, 0, 0, 0, 0},
-        {4, 3, 0, 0, 0}
+        {4, 3, 0, 0, 5}
     }, visited[SIZE][SIZE];
     vertex vertices[VERTICES_SIZE][2] = {
         {{ .x = 0, .y = 0 }, { .x = 2, .y = 0 }},
         {{ .x = 0, .y = 1 }, { .x = 2, .y = 2 }},
         {{ .x = 1, .y = 2 }, { .x = 4, .y = 1 }},
-        {{ .x = 1, .y = 3 }, { .x = 4, .y = 0 }}
+        {{ .x = 1, .y = 3 }, { .x = 4, .y = 0 }},
+        {{ .x = 2, .y = 4 }, { .x = 4, .y = 4 }}
     };
     int i;
 
     for (i = 0; i < VERTICES_SIZE; i++) {
-
-        if (dfs(board, visited, vertices[i][0], vertices[i][1], i + 1) == 0) {
-            break;
-        }
+        dfs(board, visited, vertices[i][0], vertices[i][1], i + 1);
     }
 
     return 0;
